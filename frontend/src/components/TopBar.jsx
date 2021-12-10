@@ -1,6 +1,21 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
+import {useSelector, useDispatch} from "react-redux";
+import {selectedBook} from '../actions/booksActions';
 import "../styles/navbar.css"
+import InputBase from "@material-ui/core/InputBase";
 const TopBar = () => {
+    const [search, setSearch] = useState("");
+    const books = useSelector((state) => state.allBooks.books);
+    const dispatch = useDispatch();
+    const handleSearch = (searchValue) => {
+        setSearch(searchValue);
+    };
+    useEffect(() => {
+        dispatch(selectedBook(books.filter((item) => {
+            return(item.title.toLowerCase().includes(search.toLowerCase()) || (item.author.toLowerCase().includes(search.toLowerCase())));
+        })))
+        // eslint-disable-next-line
+    }, [search, books]);
     return (
         <nav>
             <div className="navWide">
@@ -11,11 +26,11 @@ const TopBar = () => {
                         </div>
                     </div>
 
-                    <div>
-                        <form>
-                            <i class="fas fa-icon block__icon"></i>
-                            <input className="search-bar" type="text" name="search" placeholder="search"/>
-                        </form>
+                    <div className="search-bar">
+                        <InputBase name="Search" placeholder="Search"
+                            onChange={
+                                (e) => handleSearch(e.target.value)
+                            }/>
                     </div>
                     <div className="cart-icon"/>
                     <div className="cart">

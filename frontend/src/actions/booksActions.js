@@ -6,3 +6,9 @@ export const setBooks = (books) => {
     payload:books,
   };
 };
+export const selectedBook = (books) => {
+  return {
+    type: ActionTypes.SELECTED_BOOK,
+    payload: books,
+  };
+};

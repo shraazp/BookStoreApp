@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import { bookRetrieve } from "../service/getBooks";
 import {useDispatch} from "react-redux";
 import {setBooks} from "../actions/booksActions"
 import TopBar from '../components/TopBar';
 import BookCard from "../components/bookCard";
-
+import "../styles/dashboard.css"
 const Dashboard=()=>{
     const dispatch = useDispatch();
     useEffect(() => { // eslint-disable-next-line
@@ -19,9 +19,9 @@ const Dashboard=()=>{
     };
     
     return(
-        <>
+       <div className="dashboard" >
         <TopBar/>
-        <BookCard/></>
+        <BookCard/></div>
     )
 }
 export default Dashboard;

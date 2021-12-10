@@ -16,6 +16,7 @@
   align-items: center;
   font-weight: bold;
   width: 100%;
+  
 }
 .allBooks {
   display: flex;
@@ -76,12 +77,27 @@ select {
   padding: 10px;
   bottom: 90%;
   left: 90%;
-  min-height: 50%;
 }
-.paginationBlock {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.pagination-box{
+  position: absolute;
+  top: 983px;
+left: 450px;
+width: 527px;
+height: 37px;
+opacity: 1;
+}
+.pagination {
+  display: inline-block;
+}
+.page-item{
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.page-link{
+  background-color: #4CAF50;
+  color: white;
 }
 
 @media only screen and (max-width: 500px) {
