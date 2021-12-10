@@ -6,7 +6,10 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import {makeStyles} from "@material-ui/core/styles";
 import PaginationPage from "./pagination";
-import "../styles/books.css"
+import {sortByPrice,setCurrentPage} from '../actions/booksActions';
+import { useDispatch} from "react-redux";
+import "../styles/books.scss"
+
 const useStyles = makeStyles((theme) => ({
     bookName: {
         fontSize: "13px",
@@ -56,17 +59,23 @@ const useStyles = makeStyles((theme) => ({
 const BookCard = () => {
     const classes = useStyles();
     const books = useSelector((state) => state.allBooks.searchBooks);
-    const [currentPage, setCurrentPage] = useState(1);
+   const currentPage=useSelector((state)=>state.allBooks.currentPage)
     const [booksPerPage] = useState(12);
+    const [sort, setSort] = useState("")
     // Get current posts
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
     const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const paginate = pageNumber => dispatch(setCurrentPage(pageNumber))
+    const dispatch = useDispatch();
+    const handleSort = (e) => {
+       setSort(e.target.value)
+        dispatch(sortByPrice(e.target.value))
+    }
     return (
         <div className="displayBook">
             <span className="topContent">
-                <div>
+                <div   >
                     Books
                     <font className="bookSize">
                         ({
@@ -76,21 +85,25 @@ const BookCard = () => {
                     </font>
                     {" "} </div>
                 <div>
+                
                     <FormControl variant="outlined"
                         className={
                             classes.formControl
-                    }>
+                    } >
                         <Select className={
                                 classes.optionSelect
                             }
                             native
                             inputProps={
                                 {name: "type"}
-                        }>
-                            <option value={0}>Sort by relevance</option>
-                            <option value={1}>Price: low to high</option>
-                            <option value={2}>Price: high to low</option>
-                            <option value={3}>Newest Arrival</option>
+                            }
+                             value={sort}
+                            onChange={handleSort}
+                           >
+                            <option value={"rel"}>Sort by relevance</option>
+                            <option value={"asc"}  >Price: low to high</option>
+                            <option value={"desc"} >Price: high to low</option>
+                            <option value={"new"}>Newest Arrival</option>
                         </Select>
                     </FormControl>
                 </div>
@@ -143,13 +156,16 @@ const BookCard = () => {
                         } </div> */} </div>
                 ))
             }
-                <div className="pagination-box">
+              
+            </div>
+            <div className="pagination-box">
                     <PaginationPage booksPerPage={booksPerPage}
                         totalBooks={
                             books.length
                         }
-                        paginate={paginate}/></div>
-            </div>
+                        paginate={paginate}
+                        currentPage={currentPage}
+                    /></div>
         </div>
     )
 }

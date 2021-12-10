@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {selectedBook} from '../actions/booksActions';
+import {selectedBook,setCurrentPage} from '../actions/booksActions';
 import "../styles/navbar.css"
 import InputBase from "@material-ui/core/InputBase";
 const TopBar = () => {
@@ -9,6 +9,7 @@ const TopBar = () => {
     const dispatch = useDispatch();
     const handleSearch = (searchValue) => {
         setSearch(searchValue);
+        dispatch(setCurrentPage(1))
     };
     useEffect(() => {
         dispatch(selectedBook(books.filter((item) => {

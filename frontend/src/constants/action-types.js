@@ -1,4 +1,6 @@
 export const ActionTypes = {
-    SET_BOOKS:"SET_BOOKS",
+    SET_BOOKS: "SET_BOOKS",
     SELECTED_BOOK: "SELECTED_BOOKS",
-  };
+    SORT_BY_PRICE: "SORT_BY_PRICE",
+    CURRENT_PAGE: "CURRENT_PAGE"
+};

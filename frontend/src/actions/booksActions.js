@@ -12,3 +12,11 @@ export const selectedBook = (books) => {
     payload: books,
   };
 };
+export const sortByPrice = (payload) => ({
+  type: ActionTypes.SORT_BY_PRICE,
+  payload
+});
+export const setCurrentPage=(payload)=>({
+  type: ActionTypes.CURRENT_PAGE,
+  payload
+})
