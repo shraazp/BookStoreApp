@@ -9,12 +9,41 @@ const userConnect = (url, datas) => {
     });
 }
 const getBooks = (url) => {
+    return(axios({method: "get", url: url}))
+}
+const getCart = (url, token) => {
     return(axios({
         method: "get",
         url: url,
+        headers: {
+            Authorization: token
+        }
+    }))
+}
+
+const addCart = (url, data, token) => {
+    return(axios({
+        method: "post",
+        url: url,
+        data: data,
+        headers: {
+            Authorization: token
+        }
+    }))
+}
+const deleteCart=(url,token)=>{
+    return(axios({
+        method:"delete",
+        url:url,
+        headers: {
+            Authorization: token
+        }
     }))
 }
 export {
     userConnect,
-    getBooks
+    getBooks,
+    getCart,
+    addCart,
+    deleteCart
 }

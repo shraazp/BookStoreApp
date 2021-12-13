@@ -12,11 +12,20 @@ const TopBar = () => {
         dispatch(setCurrentPage(1))
     };
     useEffect(() => {
+        fetchCart()
         dispatch(selectedBook(books.filter((item) => {
             return(item.title.toLowerCase().includes(search.toLowerCase()) || (item.author.toLowerCase().includes(search.toLowerCase())));
         })))
         // eslint-disable-next-line
     }, [search, books]);
+    const fetchCart = () => {
+        cartRetrieve().then((res) => {
+            console.log("hi"+res);
+            dispatch(setCart(res));
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
     return (
         <nav>
             <div className="navWide">
@@ -33,7 +42,7 @@ const TopBar = () => {
                                 (e) => handleSearch(e.target.value)
                             }/>
                     </div>
-                    <div className="cart-icon"/>
+                    <div className="cart-icon" />
                     <div className="cart">
                         Cart
                     </div>

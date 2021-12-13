@@ -34,7 +34,7 @@ const LoginForm = () => {
         if (validate()) {
             userPost('users/login', data).then((res) => {
                 console.log(res)
-                window.location="/home"
+                window.location="/dashboard"
             }).catch((err) => {
                 console.log(err)
             })

@@ -2,7 +2,8 @@ import {ActionTypes} from "../constants/action-types";
 const intialState = {
     books: [],
     searchBooks: [],
-    currentPage:1
+    currentPage: 1,
+    cartItems: []
 };
 
 function sortDesc(arr, field) {
@@ -30,7 +31,6 @@ function sortAsc(arr, field) {
 export const booksReducer = (state = intialState, {type, payload}) => {
     switch (type) {
         case ActionTypes.SET_BOOKS:
-
             return {
                 ...state,
                 books: payload
@@ -57,8 +57,27 @@ export const booksReducer = (state = intialState, {type, payload}) => {
         case ActionTypes.CURRENT_PAGE:
             return {
                 ...state,
-                currentPage:payload
+                currentPage: payload
             }
+        case ActionTypes.SET_CART:
+            return {
+                ...state,
+                cartItems: payload
+            };
+        case ActionTypes.ADD_TO_CART:
+
+            return {
+                ...state,
+                cartItems: [
+                    ...state.cartItems,
+                    payload
+                ]
+            };
+        case ActionTypes.DELETE_FROM_CART:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(item => item.productId !== payload)
+            };
         default:
             return state;
     }

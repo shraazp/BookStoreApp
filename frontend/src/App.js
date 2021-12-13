@@ -4,7 +4,8 @@ import RegForm from './pages/RegForm';
 import ForgotPassword from './pages/ForgotPassword';
 import Reset from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
-import Demo from './pages/demo';
+
+
 import {BrowserRouter, Route} from "react-router-dom"
 const App = () => {
     return (
@@ -14,8 +15,6 @@ const App = () => {
             <Route path="/forgot"><ForgotPassword/></Route>
             <Route path="/reset"><Reset/></Route>
             <Route path="/dashboard"><Dashboard/></Route>
-            <Route path="/demo"><Demo/></Route>
-            
         </BrowserRouter>
     );
 };
