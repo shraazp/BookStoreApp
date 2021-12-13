@@ -1,5 +1,6 @@
 const {
-    getBooks
+    getBooks,
+    findABook
 }=require("../../service/book.service")
 exports.findAll = (req, res) => {
     getBooks().then(books => {
