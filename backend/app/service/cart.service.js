@@ -20,6 +20,7 @@ const addToCart = async (userId, productId, quantity) => {
     let cart;
     try {
         cart = await Cart.find({userId: userId})
+        console.log(cart)
     } catch (err) {
         console.log(err)
     }

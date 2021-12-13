@@ -24,10 +24,10 @@ module.exports.add_cart_item = async (req, res) => {
 }
 
 module.exports.delete_item = async (req, res) => {
-
+const userId=req.params.id
     const productId = req.params.itemId;
     try {
-        let cart =await deleteProduct(req.body.userId, productId)
+        let cart =await deleteProduct(userId, productId)
         return res.status(201).send(cart);
 
     } catch (err) {

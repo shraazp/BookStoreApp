@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         paddingTop: theme.spacing(10),
-        maxWidth:'774px'
     },
    
 }));

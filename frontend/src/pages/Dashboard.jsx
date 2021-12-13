@@ -6,6 +6,7 @@ import {setBooks, setCart} from "../actions/booksActions"
 import Home from '../components/Home'
 import BookCard from "../components/bookCard";
 import Cart from "./Cart";
+import Paper from '@mui/material/Paper';
 import "../styles/dashboard.scss"
 const Dashboard = () => {
     const [showCart,setShowCart]=useState(false)
@@ -32,14 +33,15 @@ const Dashboard = () => {
     }
     const cart = useSelector((state) => state.allBooks.cartItems)
     return (
-        <div>
+       <div>
             <Home setShowCart={setShowCart}/>
+            <Paper variant="outlined" sx={{ m: { xs: 2, md: 6 }, p: { xs: 2, md: 3 } ,border:"none"}}>
             {(showCart)?(cart.length===undefined?<Cart cart={cart}/>:console.log("hi")):<div className="menubar">
-                <BookCard/></div>   }
+                <BookCard/></div>  } </Paper>
             
               
                
-        </div>
+      </div>
     )
 }
 export default Dashboard;
