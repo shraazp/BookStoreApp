@@ -20,7 +20,7 @@ const addToCart = async (userId, productId, quantity) => {
     let cart;
     try {
         cart = await Cart.find({userId: userId})
-        console.log(cart)
+
     } catch (err) {
         console.log(err)
     }
@@ -90,8 +90,19 @@ const deleteProduct = async (userId, productId) => {
     cart = await cart[0].save();
     return cart;
 }
+const deleteCart= async(userId)=>{
+    let cart;
+    try {
+        cart = await Cart.find({userId: userId})
+    } catch (err) {
+        console.log(err)
+    }
+    await cart[0].delete();
+    return ("Successfully deleted")
+}
 module.exports = {
     getCart,
     addToCart,
-    deleteProduct
+    deleteProduct,
+    deleteCart
 }

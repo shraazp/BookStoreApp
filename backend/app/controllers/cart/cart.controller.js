@@ -1,4 +1,4 @@
-const {getCart, addToCart, deleteProduct} = require('../../service/cart.service.js')
+const {getCart, addToCart, deleteProduct,deleteCart} = require('../../service/cart.service.js')
 module.exports.get_cart_items = async (req, res) => {
     const userId=req.params.id;
     try {
@@ -35,3 +35,15 @@ const userId=req.params.id
         res.status(500).send("Something went wrong");
     }
 }
+module.exports.delete_cart = async (req, res) => {
+    const userId=req.params.id
+       
+        try {
+            let cart =await deleteCart(userId)
+            return res.status(201).send(cart);
+    
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("Something went wrong");
+        }
+    }

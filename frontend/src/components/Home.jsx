@@ -9,7 +9,9 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import IconButton from '@mui/material/IconButton';
 // import Button from '@material-ui/core/Button';
 import "../styles/HomePage.css";
-export default function Home({setShowCart}) {
+import { useHistory } from "react-router-dom";
+export default function Home() {
+  let history = useHistory();
   const [search, setSearch] = useState("");
   const books = useSelector((state) => state.allBooks.books);
   const dispatch = useDispatch();
@@ -29,13 +31,13 @@ export default function Home({setShowCart}) {
         <div className="block">
           <div >
             <img src={Logo} alt="FundooImg" />
-            <div className="title" onClick={()=>{setShowCart(false)}}>BookStore</div>
+            <div className="title" onClick={()=>{history.push("/dashboard")}}>BookStore</div>
             <InputBase name="Search" placeholder="Search" className="input"  onChange={
                                 (e) => handleSearch(e.target.value)
                             } />
           </div>
           <div className="rightIcons">
-            <IconButton onClick={()=>{setShowCart(true)}}>
+            <IconButton onClick={()=>{ history.push('/cart')}}>
             <div>
             <ShoppingCartOutlinedIcon />
             </div> </IconButton>
@@ -44,28 +46,6 @@ export default function Home({setShowCart}) {
             </div>
            
           </div>
-        
-        </div>
-      </div>
-
-      
-      {/* <div className="menubar">
-        <div className="Menublock">
-          <div >
-           Books
-          </div>
-          <div className="rightIconsmenu">
-            <div>
-           Sort Items
-           </div>
-          </div>
-        
-        </div>
-      </div> */}
-      <div className="menubar">
-        <div className="Menublock">
-        
-       
         
         </div>
       </div>

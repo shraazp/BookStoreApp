@@ -26,8 +26,17 @@ const Delete=(id)=>{
         throw err;
     })
 }
+const emptyCart=(id)=>{
+    let url=`http://localhost:5000/cart/${token}`
+    return deleteCart(url).then((response) => {
+        return response;
+    }).catch((err) => {
+        throw err;
+    })
+}
 export{
     cartRetrieve,
     create,
-    Delete
+    Delete,
+    emptyCart
 }

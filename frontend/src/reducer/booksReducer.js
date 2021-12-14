@@ -78,6 +78,7 @@ export const booksReducer = (state = intialState, {type, payload}) => {
                 ...state,
                 cartItems: state.cartItems.filter(item => item.productId !== payload)
             };
+      
         default:
             return state;
     }

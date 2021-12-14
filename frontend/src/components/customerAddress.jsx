@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -10,7 +10,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import {useForm} from '../components/UseForm';
-import {create} from '../service/customerDetails'
+import {create} from '../service/customerDetails';
+import { createOrder,getOrder} from '../service/orderOP';
+import {useDispatch} from "react-redux";
 const initialFValues = {
    name:"",
    phoneNumber:"",
@@ -21,7 +23,8 @@ const initialFValues = {
    landmark:"",
    type:""
 }
-const CustomerAddress = ({showCustomer}) => {
+const CustomerAddress = ({showCustomer,setShowOrder,setOrder}) => {
+    
     const validate = (fieldValues = values) => {
         let temp = {
             ...errors
@@ -54,7 +57,9 @@ const data={
     type:values.type
 }
 const handleSubmit=()=>{
-create(data).then((res)=>console.log(res)).catch((err)=>console.log(err))
+    create(data).then((res)=>console.log(res)).catch((err)=>console.log(err))
+    createOrder().then((res)=>{console.log(res.data);setOrder(res.data)}).catch((err)=>{console.log(err)})
+    setShowOrder(true)
 }
     return (<React.Fragment>
          <Paper variant="outlined" sx={{ m: { xs: 2, md: 6 }, p: { xs: 2, md: 3 } ,maxWidth:'724px'}}>
@@ -66,36 +71,36 @@ create(data).then((res)=>console.log(res)).catch((err)=>console.log(err))
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="name" name="name" label=" name" fullWidth variant="standard" onChange={handleInputChange}/>
+                <TextField required id="name" name="name" label=" name" fullWidth variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="phoneNumber" name="phoneNumber" label="phone Number" fullWidth  variant="standard" onChange={handleInputChange}/>
+                <TextField required id="phoneNumber" name="phoneNumber" label="phone Number" fullWidth  variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="pincode" name="pincode" label=" pincode" fullWidth variant="standard" onChange={handleInputChange}/>
+                <TextField required id="pincode" name="pincode" label=" pincode" fullWidth variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="locality" name="locality" label="locality" fullWidth  variant="standard" onChange={handleInputChange}/>
+                <TextField required id="locality" name="locality" label="locality" fullWidth  variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}>
-                <TextField id="address" name="address" label="Address line " fullWidth  variant="standard" onChange={handleInputChange}/>
+                <TextField id="address" name="address" label="Address line " fullWidth  variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="city" name="city" label="City/town" fullWidth  variant="standard" onChange={handleInputChange}/>
+                <TextField required id="city" name="city" label="City/town" fullWidth  variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField id="landmark" name="landmark" label="landmark" fullWidth variant="standard" onChange={handleInputChange}/>
+                <TextField id="landmark" name="landmark" label="landmark" fullWidth variant="outlined" onChange={handleInputChange}/>
             </Grid>
            <Grid item
            xs={12}
@@ -109,13 +114,16 @@ create(data).then((res)=>console.log(res)).catch((err)=>console.log(err))
                     </RadioGroup>
                 </FormControl>
            </Grid>
+           <Grid item
+           xs={12}
+           sm={6} align="right">
            <Button
                     variant="contained"
                     sx={{ mt: 3, ml: 1 }}
                     onClick={(e)=>{handleSubmit()}}
                   >
                    Continue
-                  </Button>
+                  </Button></Grid>
         </Grid> ):" "}</Paper>
     </React.Fragment>)
 }
