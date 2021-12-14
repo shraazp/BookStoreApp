@@ -9,10 +9,8 @@ const logger = require('../../utils/logger.js');
  */
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
-
     if (authHeader) {
         const token = authHeader.split(' ')[1];
-
         jwtHelper.verifyToken(token, (err, user) => {
             if (err) {
                 logger.error(err)

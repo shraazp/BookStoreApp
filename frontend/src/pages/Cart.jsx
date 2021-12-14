@@ -23,7 +23,7 @@ const Cart = () => {
         <React.Fragment>
              <Home/>
             <Paper variant="outlined" sx={{ m: { xs: 2, md: 6 }, p: { xs: 2, md: 3 } ,border:"none"}}>
-                {(cart.length===undefined?<CartCard cart={cart}/>:console.log("hi"))}
+                {(cart && cart.length===undefined?<CartCard cart={cart}/>:console.log("hi"))}
                 
     </Paper>
     </React.Fragment>

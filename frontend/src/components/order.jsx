@@ -1,17 +1,17 @@
-import React,{useState} from "react";
+import React from "react";
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { useHistory } from "react-router-dom";
 import {emptyCart} from '../service/cartOp'
 import { setCart } from "../actions/booksActions";
+import {useDispatch} from "react-redux";
 const Order=({showOrder,orders})=>{
-    let history = useHistory();
+    const dispatch = useDispatch();
     const handleSubmit=()=>{
         emptyCart().then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
-        setCart()
-        history.push('/success')
+       dispatch(setCart([])) 
+       window.location='/success';
     }
     return(
         <React.Fragment>

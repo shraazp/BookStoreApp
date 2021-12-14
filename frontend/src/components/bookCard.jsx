@@ -88,10 +88,10 @@ const BookCard = () => {
                             }
                             value={sort}
                             onChange={handleSort}>
-                            <option value={"rel"}>Sort by relevance</option>
-                            <option value={"asc"}>Price: low to high</option>
-                            <option value={"desc"}>Price: high to low</option>
-                            <option value={"new"}>Newest Arrival</option>
+                            <option value={"rel"} style={{fontSize:"11.5px"}}>Sort by relevance</option>
+                            <option value={"asc"} style={{fontSize:"11.5px"}}>Price: low to high</option>
+                            <option value={"desc"} style={{fontSize:"11.5px"}}>Price: high to low</option>
+                            <option value={"new"} style={{fontSize:"11.5px"}}>Newest Arrival</option>
                         </Select>
                     </FormControl>
                 </div>

@@ -1,6 +1,6 @@
 const {getCart, addToCart, deleteProduct,deleteCart} = require('../../service/cart.service.js')
 module.exports.get_cart_items = async (req, res) => {
-    const userId=req.params.id;
+    const userId=req.body.userId
     try {
         const data = await getCart(userId);
         return res.send(data)
@@ -10,7 +10,7 @@ module.exports.get_cart_items = async (req, res) => {
     }
 }
 module.exports.add_cart_item = async (req, res) => {
-    const userId=req.params.id;
+    const userId=req.body.userId
     const productId = req.body.productId;
     const quantity = req.body.quantity;
     try {
@@ -24,7 +24,7 @@ module.exports.add_cart_item = async (req, res) => {
 }
 
 module.exports.delete_item = async (req, res) => {
-const userId=req.params.id
+    const userId=req.body.userId
     const productId = req.params.itemId;
     try {
         let cart =await deleteProduct(userId, productId)
@@ -36,7 +36,7 @@ const userId=req.params.id
     }
 }
 module.exports.delete_cart = async (req, res) => {
-    const userId=req.params.id
+    const userId=req.body.userId
        
         try {
             let cart =await deleteCart(userId)

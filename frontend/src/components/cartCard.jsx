@@ -10,7 +10,6 @@ import {useDispatch} from "react-redux";
 import {Delete, create} from "../service/cartOp";
 import CustomerAddress from "../components/customerAddress"
 import Order from '../components/order'
-import { createOrder,getOrder} from '../service/orderOP';
 const CartCard = ({cart}) => {
   const [showCustomer,setShowCustomer]=useState(false);
   const [showOrder,setShowOrder]=useState(false);

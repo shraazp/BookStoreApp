@@ -1,6 +1,6 @@
 const {addToOrder, getOrder} = require("../../service/order.service")
 module.exports.get_order_items = async (req, res) => {
-    const userId=req.params.id;
+    const userId=req.body.userId
     try {
         const data = await getOrder(userId);
         return res.send(data)
@@ -10,9 +10,9 @@ module.exports.get_order_items = async (req, res) => {
     }
 }
 module.exports.add_order_item = async (req, res) => {
-    const userId=req.params.id;
+    const userId=req.body.userId
     try {
-        const data = await addToOrder(userId,)
+        const data = await addToOrder(userId)
         return res.status(201).send(data);
     } catch (err) {
         console.log(err);

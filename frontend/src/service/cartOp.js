@@ -2,8 +2,8 @@ import {getToken} from '../utils/Common';
 import {getCart, addCart, deleteCart} from '../helper/axios'
 const token = getToken();
 const cartRetrieve = () => {
-    let url = `http://localhost:5000/cart/${token}`
-    return getCart(url).then((response) => {
+    let url = "http://localhost:5000/cart"
+    return getCart(url,`bearer ${token}`).then((response) => {
         return response;
     }).catch((err) => {
         throw err;
@@ -11,24 +11,24 @@ const cartRetrieve = () => {
 };
 
 const create = (data) => {
-    let url = `http://localhost:5000/cart/${token}`
-    return addCart(url, data).then((response) => {
+    let url = "http://localhost:5000/cart"
+    return addCart(url, data,`bearer ${token}`).then((response) => {
         return response
     }).catch((err) => {
         throw err
     })
 }
 const Delete=(id)=>{
-    let url=`http://localhost:5000/cart/${token}/${id}`
-    return deleteCart(url).then((response) => {
+    let url=`http://localhost:5000/cart/${id}`
+    return deleteCart(url,`bearer ${token}`).then((response) => {
         return response;
     }).catch((err) => {
         throw err;
     })
 }
 const emptyCart=(id)=>{
-    let url=`http://localhost:5000/cart/${token}`
-    return deleteCart(url).then((response) => {
+    let url=`http://localhost:5000/cart/`
+    return deleteCart(url,`bearer ${token}`).then((response) => {
         return response;
     }).catch((err) => {
         throw err;

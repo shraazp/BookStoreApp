@@ -11,8 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import {useForm} from '../components/UseForm';
 import {create} from '../service/customerDetails';
-import { createOrder,getOrder} from '../service/orderOP';
-import {useDispatch} from "react-redux";
+import {createOrder} from '../service/orderOP';
 const initialFValues = {
    name:"",
    phoneNumber:"",
@@ -24,7 +23,7 @@ const initialFValues = {
    type:""
 }
 const CustomerAddress = ({showCustomer,setShowOrder,setOrder}) => {
-    
+    const [editShow,setEditShow]=useState(false)
     const validate = (fieldValues = values) => {
         let temp = {
             ...errors
@@ -57,15 +56,31 @@ const data={
     type:values.type
 }
 const handleSubmit=()=>{
-    create(data).then((res)=>console.log(res)).catch((err)=>console.log(err))
-    createOrder().then((res)=>{console.log(res.data);setOrder(res.data)}).catch((err)=>{console.log(err)})
+    setEditShow(true)
+    create(data)
+    createOrder().then((res)=>{setOrder(res.data)}).catch((err)=>{console.log(err)})
     setShowOrder(true)
 }
     return (<React.Fragment>
          <Paper variant="outlined" sx={{ m: { xs: 2, md: 6 }, p: { xs: 2, md: 3 } ,maxWidth:'724px'}}>
+         <Grid container
+            spacing={3}>
+                <Grid item
+                xs={12}
+                sm={6}>
         <Typography variant="h6" gutterBottom>
             Customer details
-        </Typography>
+        </Typography></Grid>
+      {editShow?<Grid item
+                xs={8}
+                sm={6}  align="right">
+                    <Button
+                    onClick={(e)=>{setEditShow(false)}}
+                  >
+                   Edit
+                  </Button>
+                </Grid>:""
+        }  </Grid>
        {(showCustomer)?( <Grid container
             spacing={3}>
             <Grid item
@@ -114,7 +129,7 @@ const handleSubmit=()=>{
                     </RadioGroup>
                 </FormControl>
            </Grid>
-           <Grid item
+          {!editShow?<Grid item
            xs={12}
            sm={6} align="right">
            <Button
@@ -123,7 +138,7 @@ const handleSubmit=()=>{
                     onClick={(e)=>{handleSubmit()}}
                   >
                    Continue
-                  </Button></Grid>
+                  </Button></Grid>:""} 
         </Grid> ):" "}</Paper>
     </React.Fragment>)
 }

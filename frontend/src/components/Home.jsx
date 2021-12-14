@@ -9,9 +9,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import IconButton from '@mui/material/IconButton';
 // import Button from '@material-ui/core/Button';
 import "../styles/HomePage.css";
-import { useHistory } from "react-router-dom";
 export default function Home() {
-  let history = useHistory();
   const [search, setSearch] = useState("");
   const books = useSelector((state) => state.allBooks.books);
   const dispatch = useDispatch();
@@ -31,13 +29,13 @@ export default function Home() {
         <div className="block">
           <div >
             <img src={Logo} alt="FundooImg" />
-            <div className="title" onClick={()=>{history.push("/dashboard")}}>BookStore</div>
+            <div className="title" onClick={()=>{window.location="/dashboard"}}>BookStore</div>
             <InputBase name="Search" placeholder="Search" className="input"  onChange={
                                 (e) => handleSearch(e.target.value)
                             } />
           </div>
           <div className="rightIcons">
-            <IconButton onClick={()=>{ history.push('/cart')}}>
+            <IconButton onClick={()=>{window.location='/cart'}}>
             <div>
             <ShoppingCartOutlinedIcon />
             </div> </IconButton>

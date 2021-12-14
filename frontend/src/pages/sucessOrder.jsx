@@ -1,14 +1,11 @@
 import Home from '../components/Home'
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import sucess from "../assets/sucess.png"
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@mui/material/Button';
 import {useHistory} from "react-router-dom";
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import "../styles/cart.scss"
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,36 +27,65 @@ const SuccessOrder = () => {
     return (
         <React.Fragment>
             <Home/>
-                <Stack direction="column" justifyContent="center" alignItems="center" className={
+            <Stack direction="column" justifyContent="center" alignItems="center"
+                className={
                     classes.root
-            }
-                    spacing={2}>
-                    <img className="sucess-image"
-                        src={sucess}
-                        alt=""/>
-                    <Typography variant='h6'
-                        className={
-                            classes.font
+                }
+                spacing={2}>
+                <img className="sucess-image"
+                    src={sucess}
+                    alt=""/>
+                <Typography variant='h6'
+                    className={
+                        classes.font
+                    }
+                    style={
+                        {fontWeight: 'bold'}
+                }>Order Placed Successfully</Typography>
+                <div style={
+                    {padding: "4px"}
+                }></div>
+                <div className='sucess-info'>
+                    <Typography>hurray!!! your order is confirmed the order id is #123456 save the order id for further communication..</Typography>
+                </div>
+                <div style={
+                    {padding: "4px"}
+                }></div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Email us</th>
+                            <th scope="col">Contact us</th>
+                            <th scope="col">Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>admin@bookstore.com</td>
+                            <td >+91 8163475881</td>
+                            <td >42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore 560034</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style={
+                    {padding: "4px"}
+                }></div>
+                <Button variant="contained"
+
+                    onClick={
+                        () => {
+                            history.push("/dashboard")
                         }
-                        style={
-                            {fontWeight: 'bold'}
-                    }>Order Placed Successfully</Typography>
+                }>
+                    Continue Shopping
+                </Button>
+                <div style={
+                    {padding: "4px"}
+                }></div>
+            </Stack>
 
-                    <div className='sucess-info'>
-                        <Typography>hurray!!! your order is confirmed the order id is #123456 save the order id for further communication..</Typography>
-                    </div>
 
-                    <Button variant="contained"
-                        onClick={
-                            () => {
-                                history.push("/dashboard")
-                            }
-                    }>
-                        Continue Shopping
-                    </Button>
-                </Stack>
-
-            
         </React.Fragment>
     )
 }
