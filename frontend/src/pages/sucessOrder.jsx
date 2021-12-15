@@ -1,4 +1,4 @@
-import Home from '../components/Home'
+import Home from '../components/TopBar'
 import React from "react";
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -6,7 +6,9 @@ import sucess from "../assets/sucess.png"
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@mui/material/Button';
 import {useHistory} from "react-router-dom";
+import { useSelector} from "react-redux";
 import "../styles/cart.scss"
+import Footer from "../components/footer";
 const useStyles = makeStyles(theme => ({
     root: {
 
@@ -18,75 +20,78 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center",
         color: "black",
         backgroundColor: "none",
-        fontFamily: "Comic Sans MS"
+        fontFamily: "Comic Sans MS",
+        '@media (max-width: 780px)': {
+            top: "50%"
+        }
     }
 }));
 const SuccessOrder = () => {
+
+    const orderId = useSelector((state) => state.allBooks.orderId)
     let history = useHistory();
     const classes = useStyles();
-    return (
-        <React.Fragment>
-            <Home/>
-            <Stack direction="column" justifyContent="center" alignItems="center"
+    return (<React.Fragment>
+        <Home/>
+        <Stack direction="column" justifyContent="center" alignItems="center"
+            className={
+                classes.root
+            }
+            spacing={2}>
+            <img className="sucess-image"
+                src={sucess}
+                alt=""/>
+            <Typography variant='h6'
                 className={
-                    classes.root
+                    classes.font
                 }
-                spacing={2}>
-                <img className="sucess-image"
-                    src={sucess}
-                    alt=""/>
-                <Typography variant='h6'
-                    className={
-                        classes.font
+                style={
+                    {fontWeight: 'bold'}
+            }>Order Placed Successfully</Typography>
+            <div style={
+                {padding: "4px"}
+            }></div>
+            <div className='sucess-info'>
+                <Typography>hurray!!! your order is confirmed the order id is {orderId} save the order id for further communication..</Typography>
+            </div>
+            <div style={
+                {padding: "4px"}
+            }></div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Email us</th>
+                        <th scope="col">Contact us</th>
+                        <th scope="col">Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>admin@bookstore.com</td>
+                        <td>+91 8163475881</td>
+                        <td>42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore 560034</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style={
+                {padding: "4px"}
+            }></div>
+            <Button variant="contained"
+
+                onClick={
+                    () => {
+                        history.push("/dashboard")
                     }
-                    style={
-                        {fontWeight: 'bold'}
-                }>Order Placed Successfully</Typography>
-                <div style={
-                    {padding: "4px"}
-                }></div>
-                <div className='sucess-info'>
-                    <Typography>hurray!!! your order is confirmed the order id is #123456 save the order id for further communication..</Typography>
-                </div>
-                <div style={
-                    {padding: "4px"}
-                }></div>
+            }>
+                Continue Shopping
+            </Button>
+            <div style={
+                {padding: "4px"}
+            }></div>
+        </Stack>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Email us</th>
-                            <th scope="col">Contact us</th>
-                            <th scope="col">Address</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>admin@bookstore.com</td>
-                            <td >+91 8163475881</td>
-                            <td >42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore 560034</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div style={
-                    {padding: "4px"}
-                }></div>
-                <Button variant="contained"
-
-                    onClick={
-                        () => {
-                            history.push("/dashboard")
-                        }
-                }>
-                    Continue Shopping
-                </Button>
-                <div style={
-                    {padding: "4px"}
-                }></div>
-            </Stack>
-
-
-        </React.Fragment>
-    )
+        <Footer/>
+    </React.Fragment>)
 }
 export default SuccessOrder;

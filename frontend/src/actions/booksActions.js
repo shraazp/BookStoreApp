@@ -40,5 +40,11 @@ export const deleteCart = (bookId) => {
     type: ActionTypes.DELETE_FROM_CART,
     payload: bookId
   }
+}
+  export const setOrderID = (orderId) => {
+    return {
+      type: ActionTypes.ORDER_ID,
+      payload: orderId
+    }
 };
 

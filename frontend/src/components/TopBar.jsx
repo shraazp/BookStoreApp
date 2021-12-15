@@ -1,54 +1,72 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {selectedBook,setCurrentPage} from '../actions/booksActions';
-import "../styles/navbar.css"
+import {selectedBook, setCurrentPage} from '../actions/booksActions';
+import Logo from "../assets/education.png";
 import InputBase from "@material-ui/core/InputBase";
-const TopBar = () => {
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import {useHistory} from "react-router-dom";
+import "../styles/Topbar.scss";
+export default function Home() {
+    let history = useHistory();
     const [search, setSearch] = useState("");
     const books = useSelector((state) => state.allBooks.books);
+    const cart=useSelector((state)=>state.allBooks.cartItems)
     const dispatch = useDispatch();
     const handleSearch = (searchValue) => {
         setSearch(searchValue);
         dispatch(setCurrentPage(1))
     };
     useEffect(() => {
-        fetchCart()
         dispatch(selectedBook(books.filter((item) => {
             return(item.title.toLowerCase().includes(search.toLowerCase()) || (item.author.toLowerCase().includes(search.toLowerCase())));
         })))
         // eslint-disable-next-line
     }, [search, books]);
-    const fetchCart = () => {
-        cartRetrieve().then((res) => {
-            console.log("hi"+res);
-            dispatch(setCart(res));
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-    return (
-        <nav>
-            <div className="navWide">
-                <div className="wideDiv">
-                    <div className="heading-icon">
-                        <div className="heading">
-                            BookStore
-                        </div>
-                    </div>
-
-                    <div className="search-bar">
-                        <InputBase name="Search" placeholder="Search"
-                            onChange={
-                                (e) => handleSearch(e.target.value)
-                            }/>
-                    </div>
-                    <div className="cart-icon" />
-                    <div className="cart">
-                        Cart
-                    </div>
+    return (<div className="mainDiv">
+        <div className="topnav">
+            <div className="block">
+                <div>
+                    <img src={Logo}
+                        alt="FundooImg"/>
+                    <div className="title"
+                        onClick={
+                            () => {
+                                history.push("/dashboard")
+                            }
+                    }>BookStore</div>
+                    <InputBase name="Search" placeholder="Search" className="input"
+                        inputProps={
+                            {'aria-label': 'search'}
+                        }
+                        startAdornment={<SearchIcon/>}
+                        onChange={
+                            (e) => handleSearch(e.target.value)
+                        }/>
                 </div>
+                <div className="rightIcons">
+                    <IconButton onClick={
+                        () => {
+                            history.push('/cart') 
+                        }
+                    } style={{ 'marginTop': '1.5vh',}}>
+                        <div>
+                            <ShoppingCartOutlinedIcon/>
+                           {(Array.isArray(cart)===false)&&cart.items.length>0?<span className="cart-count">{cart.items.length}</span>:""} 
+                        </div>
+                    </IconButton>
+                    <div>
+                    Cart
+                    </div>
+                    
+                       
+                   
+
+                </div>
+
             </div>
-        </nav>
-    );
+        </div>
+
+    </div>);
 }
-export default TopBar

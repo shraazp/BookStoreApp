@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from "../components/UseForm";
 import userPost from '../service/userRegister'
-import '../styles/ForgotPassword.css'
+import '../styles/login.css'
 const ForgotPassword = () => {
     const initialFValues = {
         email: ""

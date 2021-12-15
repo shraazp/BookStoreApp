@@ -6,17 +6,21 @@ import Button from '@mui/material/Button';
 import {emptyCart} from '../service/cartOp'
 import { setCart } from "../actions/booksActions";
 import {useDispatch} from "react-redux";
+import { setOrderID } from "../actions/booksActions";
+import {useHistory} from "react-router-dom";
 const Order=({showOrder,orders})=>{
+  let history = useHistory();
     const dispatch = useDispatch();
     const handleSubmit=()=>{
         emptyCart().then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
        dispatch(setCart([])) 
-       window.location='/success';
+       dispatch(setOrderID(orders._id))
+     history.push('/success');
     }
     return(
         <React.Fragment>
          <Paper variant="outlined" sx={{ m: { xs: 2, md: 6 }, p: { xs: 2, md: 3 } ,maxWidth:'724px'}}>
-        <Typography variant="h6" gutterBottom  >
+        <Typography gutterBottom   style={{fontWeight:"bold",fontSize:"18px"}} >
             Order Summary
         </Typography>
         {(showOrder && orders.length!==0)?(
@@ -25,10 +29,10 @@ const Order=({showOrder,orders})=>{
                {
            orders.items.map((data) => (
                <Grid container
-           spacing={1} >
-               <Grid item xs={4}  sx={{ py: { xs: 2, md: 3 }}}>
+           spacing={1} style={{paddingTop:"4%"}}>
+               <Grid item  xs={4} sx={{ py: { xs: 2, md: 3 }}}>
                <img
-                 className="bookImage"
+                 className="cartImage"
                  src={data.image}
                  alt=""  
                />
@@ -52,7 +56,7 @@ const Order=({showOrder,orders})=>{
               </div></Grid></Grid>
            )
            )}
-               <Grid item xs={4}  align="right">
+               <Grid item xs={4} align="left">
                    <Typography style={{ fontWeight: "bold", fontSize: "18px" }}>
                        Total Bill is Rs.{orders.bill}
                    </Typography>
@@ -60,6 +64,7 @@ const Order=({showOrder,orders})=>{
            <Grid item xs={8}  align="right">
              <Button
                    variant="contained"
+                   style={{backgroundColor:"#1976d2",color:"white",padding: "6px 16px",width: "151px",height: "35px",marginRight:"2%"}}
                    onClick={(e)=>{handleSubmit()}}
                  >
                Checkout

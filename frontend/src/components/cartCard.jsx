@@ -9,10 +9,12 @@ import {setCart} from '../actions/booksActions';
 import {useDispatch} from "react-redux";
 import {Delete, create} from "../service/cartOp";
 import CustomerAddress from "../components/customerAddress"
-import Order from '../components/order'
+import Order from '../components/order';
+import "../styles/cart.scss"
 const CartCard = ({cart}) => {
   const [showCustomer,setShowCustomer]=useState(false);
   const [showOrder,setShowOrder]=useState(false);
+  const [showCheckout,setShowCheckout]=useState(true);
   const [orders,setOrder]=useState([])
   const dispatch = useDispatch();
   const handleQuantity = (productId, quantity) => {
@@ -32,22 +34,24 @@ const CartCard = ({cart}) => {
       })
   }
   const placeOrder = () => {
+      setShowCheckout(false)
       setShowCustomer(true)
   }
     return(
         <React.Fragment>
         <Paper variant="outlined" sx={{ m: { xs: 1, md: 6 }, p: { xs: 2, md: 3 } ,maxWidth:'724px'}}>
-       <Typography variant="h6" gutterBottom  sx={{ py:3 }}>
-                My Cart ({cart.items.length}items)
+       <Typography  gutterBottom   style={{fontWeight:"bold",fontSize:"18px",paddingBottom:"4%"}}>
+                My Cart ({cart.items.length} items)
        </Typography>
+       
        <Grid container
-            spacing={1}>
+            spacing={1} >
        {cart.items.map((data) =>(
             <Grid container
             spacing={1} >
-                <Grid item xs={4}  sx={{ py: { xs: 2, md: 3 }}}>
+                <Grid item xs={4} >
                     <img
-                        className="bookImage"
+                        className="cartImage"
                         src={data.image}
                         alt=""  
                     />
@@ -75,7 +79,7 @@ const CartCard = ({cart}) => {
                         } >
                             <RemoveCircleOutlineIcon/>
                         </IconButton>
-                        <input type="number" min="1" max="5"
+                        <input className="data-quantity" type="number" min="1" max="5"
                             value={
                                 data.quantity
                             }
@@ -100,12 +104,13 @@ const CartCard = ({cart}) => {
    
    )
        )}</Grid>
-       <Grid item xs={12}  align="right">
+      {showCheckout? <Grid item xs={12}  align="right">
               <Button
                     variant="contained"
+                    style={{backgroundColor:"#1976d2",color:"white",padding: "6px 16px",width: "151px",height: "35px",marginRight:"2%"}}
                     onClick={()=>{placeOrder()}}>
                   Place Order
-                  </Button></Grid>
+                  </Button></Grid>:""} 
        </Paper>
        <CustomerAddress showCustomer={showCustomer} setShowOrder={setShowOrder} setOrder={setOrder}/>
     <Order showOrder={showOrder} orders={orders}/>

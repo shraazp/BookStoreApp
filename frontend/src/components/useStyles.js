@@ -1,17 +1,20 @@
-
 import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     bookName: {
+        fontFamily: "Poppins, sans-serif",
         fontSize: "13px",
         fontWeight: "bold"
     },
     bookAuthor: {
+        fontFamily: "Poppins, sans-serif",
         fontSize: "12px"
     },
     bookQuantity: {
+        fontFamily: "Poppins, sans-serif",
         fontSize: "12px"
     },
     bookPrize: {
+        fontFamily: "Poppins, sans-serif",
         fontSize: "13px",
         fontWeight: "bold"
     },
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         margin: "5px",
         color: "#ffff",
         borderRadius: "2px",
-        fontSize: "11px"
+        fontSize: "11px",
     },
     wishListButton: {
         padding: "3px 4px 3px 4px",
@@ -43,12 +46,13 @@ const useStyles = makeStyles((theme) => ({
     },
 
     optionSelect: {
-        padding: "5px 5px"
+        padding: "5px 5px",
+        height: "30px"
     },
     container: {
-        paddingTop: theme.spacing(10),
-    },
-   
+        paddingTop: theme.spacing(10)
+    }
+
 }));
 
 export default useStyles;

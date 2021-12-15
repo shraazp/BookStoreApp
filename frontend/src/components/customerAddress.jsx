@@ -45,6 +45,9 @@ const CustomerAddress = ({showCustomer,setShowOrder,setOrder}) => {
         setErrors,
         handleInputChange
     } = useForm(initialFValues,true,validate);
+   
+   
+    
 const data={
     name:values.name,
     phoneNumber:values.phoneNumber,
@@ -68,7 +71,7 @@ const handleSubmit=()=>{
                 <Grid item
                 xs={12}
                 sm={6}>
-        <Typography variant="h6" gutterBottom>
+        <Typography gutterBottom   style={{fontWeight:"bold",fontSize:"18px"}} >
             Customer details
         </Typography></Grid>
       {editShow?<Grid item
@@ -86,17 +89,17 @@ const handleSubmit=()=>{
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="name" name="name" label=" name" fullWidth variant="outlined" onChange={handleInputChange}/>
+                <TextField required id="name" name="name" label=" name" value={values.name}  fullWidth variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="phoneNumber" name="phoneNumber" label="phone Number" fullWidth  variant="outlined" onChange={handleInputChange}/>
+                <TextField required id="phoneNumber" name="phoneNumber" label="phone Number"  fullWidth  variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField required id="pincode" name="pincode" label=" pincode" fullWidth variant="outlined" onChange={handleInputChange}/>
+                <TextField required id="pincode" name="pincode" label=" pincode"  fullWidth variant="outlined" onChange={handleInputChange}/>
             </Grid>
             <Grid item
                 xs={12}
@@ -115,7 +118,7 @@ const handleSubmit=()=>{
             <Grid item
                 xs={12}
                 sm={6}>
-                <TextField id="landmark" name="landmark" label="landmark" fullWidth variant="outlined" onChange={handleInputChange}/>
+                <TextField id="landmark" name="landmark" label="landmark" fullWidth  variant="outlined" onChange={handleInputChange}/>
             </Grid>
            <Grid item
            xs={12}
@@ -134,6 +137,7 @@ const handleSubmit=()=>{
            sm={6} align="right">
            <Button
                     variant="contained"
+                    style={{backgroundColor:"#1976d2",color:"white",padding: "6px 16px",width: "151px",height: "35px",marginRight:"2%"}}
                     sx={{ mt: 3, ml: 1 }}
                     onClick={(e)=>{handleSubmit()}}
                   >

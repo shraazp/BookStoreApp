@@ -3,7 +3,8 @@ const intialState = {
     books: [],
     searchBooks: [],
     currentPage: 1,
-    cartItems: []
+    cartItems: [],
+    orderId: ""
 };
 
 function sortDesc(arr, field) {
@@ -78,7 +79,12 @@ export const booksReducer = (state = intialState, {type, payload}) => {
                 ...state,
                 cartItems: state.cartItems.filter(item => item.productId !== payload)
             };
-      
+        case ActionTypes.ORDER_ID:
+            return {
+                ...state,
+                orderId: payload
+            };
+
         default:
             return state;
     }
