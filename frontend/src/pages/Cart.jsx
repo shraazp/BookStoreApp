@@ -20,11 +20,12 @@ const Cart = () => {
         });
     }
     const cart = useSelector((state) => state.allBooks.cartItems)
+    console.log(cart)
     return ( 
         <React.Fragment>
              <Home/>
             <Paper variant="outlined" sx={{ mx: { xs: 2, md: 6 }, p: { xs: 2, md: 3 } ,border:"none"}}>
-                {cart && cart.length===undefined?
+                {cart&&(Object.keys(cart).length !== 0)?
                 <CartCard cart={cart}/>: 
                 <Paper variant="outlined" sx={{ m: { xs: 1, md: 6 }, p: { xs: 2, md: 3 } ,maxWidth:'724px'}}>
                     <Typography variant="h6" gutterBottom  sx={{ py:3 }}>

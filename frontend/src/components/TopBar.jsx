@@ -12,7 +12,7 @@ export default function Home() {
     let history = useHistory();
     const [search, setSearch] = useState("");
     const books = useSelector((state) => state.allBooks.books);
-    const cart=useSelector((state)=>state.allBooks.cartItems)
+    const cart=useSelector((state)=>state.allBooks.cartItems);
     const dispatch = useDispatch();
     const handleSearch = (searchValue) => {
         setSearch(searchValue);
@@ -53,7 +53,7 @@ export default function Home() {
                     } style={{ 'marginTop': '1.5vh',}}>
                         <div>
                             <ShoppingCartOutlinedIcon/>
-                           {(Array.isArray(cart)===false)&&cart.items.length>0?<span className="cart-count">{cart.items.length}</span>:""} 
+                           {cart&&(Object.keys(cart).length !== 0)&&cart.items.length>0?<span className="cart-count">{cart.items.length}</span>:""} 
                         </div>
                     </IconButton>
                     <div>

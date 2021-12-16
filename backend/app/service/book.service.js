@@ -1,5 +1,6 @@
 const {findBook,
-    findAllBooks
+    findAllBooks,
+    update 
 }=require('../models/book.model');
 
  const getBooks = () => {
@@ -8,7 +9,11 @@ const {findBook,
 const findABook=(findId)=>{
 return findBook(findId)
 }
+const updateQuantity=(findId,quantity)=>{
+    return update(findId,quantity)
+}
 module.exports ={
     getBooks,
-    findABook
+    findABook,
+    updateQuantity
 }

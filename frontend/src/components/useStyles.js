@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         margin: "5px",
         color: "#ffff",
         borderRadius: "2px",
-        fontSize: "11px",
+        fontSize: "11px"
     },
     wishListButton: {
         padding: "3px 4px 3px 4px",
@@ -43,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "2px",
         fontWeight: "bold",
         border: "1px solid #9D9D9D"
+    },
+    wishlistedButton: {
+        width: "170px",
+        margin: "5px",
+          border: "1px solid #9D9D9D",
+        fontSize: "11px",
+        fontWeight: "bold",
     },
 
     optionSelect: {

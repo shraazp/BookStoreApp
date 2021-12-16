@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 .topContent {
   font-size: 20px;
@@ -13,7 +12,6 @@
   align-items: center;
   font-weight: bold;
   width: 100%;
-  
 }
 .allBooks {
   display: flex;
@@ -29,14 +27,14 @@
   height: 280px;
   width: 222px;
 }
-.book-title{
+.book-title {
   margin-left: 2%;
 }
 .bookSize {
   font-size: 12px;
   font-weight: normal;
 }
-.sort-options{
+.sort-options {
   margin-right: 2%;
 }
 .imageContainer {
@@ -63,7 +61,22 @@ select {
 }
 .bookImage {
   width: 90px;
-  height:117px;
+  height: 117px;
+}
+.out-of-stock {
+  position: absolute;
+  width: 178px;
+  height: 37px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 2px;
+  letter-spacing: 0px;
+  color: #0b0203;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 3px;
+  text-align: center;
 }
 .bookContainer:hover .descClass {
   display: flex;
@@ -81,8 +94,10 @@ select {
   padding: 10px;
   bottom: 90%;
   left: 90%;
+  width: 456px;
+  font-size: 12px;
 }
-pagination-box{
+pagination-box {
   position: inherit;
   top: 1183px;
   left: 450px;
@@ -91,7 +106,6 @@ pagination-box{
 }
 .pagination {
   display: inline-block;
- 
 }
 
 .pagination a {
@@ -101,17 +115,17 @@ pagination-box{
   text-decoration: none;
 }
 .pagination a.active {
-  background-color: #8F2B2F;
+  background-color: #8f2b2f;
   color: white;
 }
-.page-item{
+.page-item {
   color: black;
   float: left;
   padding: 8px 16px;
   text-decoration: none;
 }
-.page-link{
-  background-color: #4CAF50;
+.page-link {
+  background-color: #4caf50;
   color: white;
 }
 

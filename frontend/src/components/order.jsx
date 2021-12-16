@@ -13,7 +13,7 @@ const Order=({showOrder,orders})=>{
     const dispatch = useDispatch();
     const handleSubmit=()=>{
         emptyCart().then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
-       dispatch(setCart([])) 
+       dispatch(setCart({})) 
        dispatch(setOrderID(orders._id))
      history.push('/success');
     }

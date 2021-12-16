@@ -17,7 +17,7 @@ const BookSchema = mongoose.Schema({
     image: {
         type: String,
         required: true,
-        validate: urlValidator
+        // validate: urlValidator
     },
     quantity:{
         type:Number,
@@ -41,7 +41,25 @@ const Book = mongoose.model('Book', BookSchema);
 const findBook=(findId)=>{
   return Book.findById(findId)
 }
+const update=(findId,quantity)=>{
+    return Book.findOneAndUpdate(findId).then((data) => {
+        if (!data) {
+            throw "some error";
+        } else {
+            (data.quantity = data.quantity-quantity)
+            return data.save().then((data) => {
+                return data;
+            }).catch((err) => {
+                throw err;
+            });
+        }
+    }).catch((err) => {
+        throw err;
+    });
+};
+
 module.exports= {
     findBook,
-    findAllBooks
+    findAllBooks,
+    update
 }

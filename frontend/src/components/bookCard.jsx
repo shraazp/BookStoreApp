@@ -38,119 +38,142 @@ const BookCard = () => {
     }
 
     const ButtonContainer = ({data}) => {
-        return (<div className="buttonContainer">
-            <Button className={
-                    classes.addToBagButton
-                }
-                onClick={
-                    () => {
-                        let productId = data._id;
-                        HandleAddToCart(productId)
+        return (
+            <div className="buttonContainer">
+                <Button className={
+                        classes.addToBagButton
                     }
-            }>Add to bag</Button>
-            <Button className={
-                classes.wishListButton
-            }>Wishlist</Button>
-        </div>)
+                    onClick={
+                        () => {
+                            let productId = data._id;
+                            HandleAddToCart(productId)
+                        }
+                }>Add to bag</Button>
+                <Button className={
+                    classes.wishListButton
+                }>Wishlist</Button>
+            </div>
+        )
     }
     const AddedToBag = () => {
-        return (<div className="buttonContainer">
-            <Button className={
-            classes.addedBagButton
-        }>Added To Bag</Button>
-        </div>)
-    }
-    return (<div className="displayBook">
-        <span className="topContent">
-            <div className='book-title'>
-                Books
-                <font className="bookSize">
-                    ( {
-                    books.length
-                }
-                    items )
-                </font>
-                {" "} </div>
-            <div className='sort-options'>
-                <FormControl variant="outlined"
-                    className={
-                        classes.formControl
-                }>
-                    <Select className={
-                            classes.optionSelect
-                        }
-                        native
-                        inputProps={
-                            {name: "type"}
-                        }
-                        value={sort}
-                        onChange={handleSort}>
-                        <option value={"rel"}
-                            style={
-                                {fontSize: "11.5px"}
-                        }>Sort by relevance</option>
-                        <option value={"asc"}
-                            style={
-                                {fontSize: "11.5px"}
-                        }>Price: low to high</option>
-                        <option value={"desc"}
-                            style={
-                                {fontSize: "11.5px"}
-                        }>Price: high to low</option>
-                        <option value={"new"}
-                            style={
-                                {fontSize: "11.5px"}
-                        }>Newest Arrival</option>
-                    </Select>
-                </FormControl>
+        return (
+            <div className="buttonContainer">
+                <Button className={
+                    classes.addedBagButton
+                }>Added To Bag</Button>
             </div>
-        </span>
-        <div className="allBooks"> {
-            currentBooks.map((data) => (<div className="bookContainer">
-                <div className="imageContainer">
-                    <img className="bookImage"
-                        src={
-                            data.image
-                        }
-                        alt=""/>
-                </div>
-                <div className="infoContainer">
-                    <Typography className={
-                        classes.bookName
-                    }> {
-                        data.title
-                    } </Typography>
-                    <Typography className={
-                        classes.bookAuthor
-                    }> {
-                        data.author
-                    } </Typography>
-                    <Typography className={
-                        classes.bookPrize
+        )
+    }
+    const Wishlisted = () => {
+        return (
+            <div className="buttonContainer">
+                <Button className={
+                    classes.wishlistedButton
+                }>Wishlist</Button>
+            </div>
+        )
+    }
+    return (
+        <div className="displayBook">
+            <span className="topContent">
+                <div className='book-title'>
+                    Books
+                    <font className="bookSize">
+                        ({
+                        books.length
+                    }
+                        items )
+                    </font>
+                    {" "} </div>
+                <div className='sort-options'>
+                    <FormControl variant="outlined"
+                        className={
+                            classes.formControl
                     }>
-                        Rs. {
-                        data.price
-                    } </Typography>
+                        <Select className={
+                                classes.optionSelect
+                            }
+                            native
+                            inputProps={
+                                {name: "type"}
+                            }
+                            value={sort}
+                            onChange={handleSort}>
+                            <option value={"rel"}
+                                style={
+                                    {fontSize: "11.5px"}
+                            }>Sort by relevance</option>
+                            <option value={"asc"}
+                                style={
+                                    {fontSize: "11.5px"}
+                            }>Price: low to high</option>
+                            <option value={"desc"}
+                                style={
+                                    {fontSize: "11.5px"}
+                            }>Price: high to low</option>
+                            <option value={"new"}
+                                style={
+                                    {fontSize: "11.5px"}
+                            }>Newest Arrival</option>
+                        </Select>
+                    </FormControl>
                 </div>
+            </span>
+            <div className="allBooks">
                 {
-                ((cart && cart.length !== 0) && (cart.items.some(obj => obj.productId === data._id))) ? <AddedToBag/>: <ButtonContainer data={data}/>
-            }
-                <div className="descClass">
-                    <Typography className={
-                        classes.bookName
-                    }>Book Detail</Typography>
-                    {
-                    data.description
-                } </div>
-            </div>))
-        } </div>
-        <div className="pagination-box">
-            <PaginationPage booksPerPage={booksPerPage}
-                totalBooks={
-                    books.length
-                }
-                paginate={paginate}
-                currentPage={currentPage}/></div>
-    </div>)
+                currentBooks.map((data) => (
+                    <div className="bookContainer">
+                        <div className="imageContainer">
+                            <img className="bookImage"
+                                src={
+                                    data.image
+                                }
+                                alt=""/> {
+                            data.quantity === 0 ? <div className='out-of-stock'>
+                                OUT OF STOCK
+                            </div> : ""
+                        } </div>
+                        <div className="infoContainer">
+                            <Typography className={
+                                classes.bookName
+                            }>
+                                {
+                                data.title
+                            } </Typography>
+                            <Typography className={
+                                classes.bookAuthor
+                            }>
+                                {
+                                data.author
+                            } </Typography>
+                            <Typography className={
+                                classes.bookPrize
+                            }>
+                                Rs. {
+                                data.price
+                            } </Typography>
+                        </div>
+                        {
+                        ((cart && (Object.keys(cart).length !== 0)) && (cart.items.some(obj => obj.productId === data._id))) ? <AddedToBag/>: (data.quantity === 0) ? <Wishlisted/>: <ButtonContainer data={data}/>
+                    }
+                        <div className="descClass">
+                            <Typography className={
+                                classes.bookName
+                            }>Book Detail</Typography>
+                            {
+                            data.description
+                        } </div>
+                    </div>
+                ))
+            } </div>
+            <div className="pagination-box">
+                <PaginationPage booksPerPage={booksPerPage}
+                    totalBooks={
+                        books.length
+                    }
+                    paginate={paginate}
+                    currentPage={currentPage}/></div>
+        </div>
+    )
 }
 export default BookCard;

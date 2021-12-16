@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
 import {bookRetrieve} from "../service/getBooks";
+import {cartRetrieve} from "../service/cartOp";
 import {useDispatch} from "react-redux";
-import {setBooks} from "../actions/booksActions"
+import {setBooks,setCart} from "../actions/booksActions"
 import Home from '../components/TopBar'
 import BookCard from "../components/bookCard";
 import Paper from '@mui/material/Paper';
@@ -9,7 +10,8 @@ import Footer from "../components/footer";
 const Dashboard = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-         fetchitem(); // eslint-disable-next-line
+         fetchitem();
+         fetchCart(); // eslint-disable-next-line
     }, []);
     const fetchitem = () => {
         bookRetrieve().then((res) => {
@@ -18,6 +20,13 @@ const Dashboard = () => {
             console.log(err);
         });
     };
+    const fetchCart = () => {
+        cartRetrieve().then((res) => {
+            dispatch(setCart(res.data[0]));
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
     
     return (
        <div>
