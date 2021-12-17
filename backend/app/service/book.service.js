@@ -5,7 +5,7 @@
  * @version:1.0
  * @since:7/12/2021
  */
-const {findBook, findAllBooks, update,searchBook} = require('../models/book.model');
+const {findBook, findAllBooks, update,searchBook,sortBooks} = require('../models/book.model');
 /**
  * @description to fetch all books from database
  * @returns promise
@@ -33,9 +33,14 @@ const updateQuantity = (findId, quantity) => {
 const search=(searchText)=>{
     return searchBook(searchText)
 }
+const sort=(order)=>{
+    console.log(order)
+    return  order==="rel"||order==="new"?(findAllBooks()):(sortBooks(order))
+}
 module.exports = {
     getBooks,
     findABook,
     updateQuantity,
-    search
+    search,
+    sort
 }

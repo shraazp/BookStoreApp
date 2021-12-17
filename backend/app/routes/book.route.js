@@ -12,4 +12,6 @@ const books = require('../controllers/books/book.controller.js');
 routerBook.get('/',validation.authenticateJWT, books.findAll);
 // finds all book based on search key
 routerBook.post("/search", validation.authenticateJWT, books.searchBook)
+// finds all book based on search key
+routerBook.post("/sort", validation.authenticateJWT, books.sortBook)
 module.exports = routerBook

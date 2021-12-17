@@ -17,4 +17,12 @@ const searchForBook=(data)=>{
         throw err;
     });
 }
-export {bookRetrieve,searchForBook}
+const sortBook=(data)=>{
+    let url = "http://localhost:5000/books/sort"
+    return searchBooks(url,data,`bearer ${token}`).then((response) => {
+        return response;
+    }).catch((err) => {
+        throw err;
+    });
+}
+export {bookRetrieve,searchForBook,sortBook}

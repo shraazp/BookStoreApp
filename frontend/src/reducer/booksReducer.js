@@ -7,28 +7,7 @@ const intialState = {
     orderId: ""
 };
 
-function sortDesc(arr, field) {
-    return arr.sort(function (a, b) {
-        if (a[field] > b[field]) {
-            return -1;
-        }
-        if (b[field] > a[field]) {
-            return 1;
-        }
-        return 0;
-    })
-}
-function sortAsc(arr, field) {
-    return arr.sort(function (a, b) {
-        if (a[field] > b[field]) {
-            return 1;
-        }
-        if (b[field] > a[field]) {
-            return -1;
-        }
-        return 0;
-    })
-}
+
 export const booksReducer = (state = intialState, {type, payload}) => {
     switch (type) {
         case ActionTypes.SET_BOOKS:
@@ -40,20 +19,6 @@ export const booksReducer = (state = intialState, {type, payload}) => {
             return {
                 ...state,
                 searchBooks: payload
-            };
-        case ActionTypes.SORT_BY_PRICE:
-            let sortedArr
-            switch (payload) {
-                case "asc": sortedArr = sortAsc(state.searchBooks, 'price');
-                    break;
-                case "desc": sortedArr = sortDesc(state.searchBooks, 'price');
-                    break;
-                default: sortedArr = state.books;
-                    break
-            }
-            return {
-                ...state,
-                searchBooks: sortedArr
             };
         case ActionTypes.CURRENT_PAGE:
             return {

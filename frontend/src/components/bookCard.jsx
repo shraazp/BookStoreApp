@@ -5,11 +5,12 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import PaginationPage from "./pagination";
-import {sortByPrice, setCurrentPage, setCart} from '../actions/booksActions';
+import {setCurrentPage, setCart,selectedBook} from '../actions/booksActions';
 import {useDispatch} from "react-redux";
 import "../styles/books.scss"
 import useStyles from './useStyles';
 import {create} from '../service/cartOp';
+import { sortBook } from '../service/getBooks';
 const BookCard = () => {
     const classes = useStyles();
     const books = useSelector((state) => state.allBooks.searchBooks);
@@ -24,7 +25,7 @@ const BookCard = () => {
     const dispatch = useDispatch();
     const handleSort = (e) => {
         setSort(e.target.value)
-        dispatch(sortByPrice(e.target.value))
+       sortBook({descending:e.target.value}).then((res)=>{dispatch(selectedBook(res.data))}).catch((err)=>{console.log(err)})
         dispatch(setCurrentPage(1))
     }
     const HandleAddToCart = (productId) => {

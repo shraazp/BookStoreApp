@@ -104,10 +104,22 @@ const searchBook = async (searchText) => {
       throw error;
     }
   };
-
+  /**
+ * @description to sort for  a book present in the database
+ * @returns data
+ */
+const sortBooks=async(order)=>{
+    try{
+        return await Book.find().sort({price:order})
+    }
+    catch (error) {
+        throw error;
+      }
+}
 module.exports = {
     findBook,
     findAllBooks,
     update,
-    searchBook
+    searchBook,
+    sortBooks
 }
