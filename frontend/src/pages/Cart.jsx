@@ -20,7 +20,6 @@ const Cart = () => {
         });
     }
     const cart = useSelector((state) => state.allBooks.cartItems)
-    console.log(cart)
     return ( 
         <React.Fragment>
              <Home/>

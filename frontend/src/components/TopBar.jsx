@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {selectedBook, setCurrentPage} from '../actions/booksActions';
+import { searchForBook } from '../service/getBooks';
 import Logo from "../assets/education.png";
 import InputBase from "@material-ui/core/InputBase";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -12,16 +13,16 @@ export default function Home() {
     let history = useHistory();
     const [search, setSearch] = useState("");
     const books = useSelector((state) => state.allBooks.books);
-    const cart=useSelector((state)=>state.allBooks.cartItems);
+    const cart = useSelector((state) => state.allBooks.cartItems);
     const dispatch = useDispatch();
     const handleSearch = (searchValue) => {
         setSearch(searchValue);
         dispatch(setCurrentPage(1))
     };
     useEffect(() => {
-        dispatch(selectedBook(books.filter((item) => {
-            return(item.title.toLowerCase().includes(search.toLowerCase()) || (item.author.toLowerCase().includes(search.toLowerCase())));
-        })))
+        searchForBook({"searchText":search}).then((res)=>{
+            dispatch(selectedBook(res.data))
+        }).catch((err)=>console.log(err))
         // eslint-disable-next-line
     }, [search, books]);
     return (<div className="mainDiv">
@@ -47,26 +48,28 @@ export default function Home() {
                 </div>
                 <div className="rightIcons">
                     <IconButton onClick={
-                        () => {
-                            history.push('/cart') 
+                            () => {
+                                history.push('/cart')
+                            }
                         }
-                    } style={{ 'marginTop': '1.5vh',}}>
+                        style={
+                            {'marginTop': '1.5vh'}
+                    }>
                         <div>
-                            <ShoppingCartOutlinedIcon/>
-                           {cart&&(Object.keys(cart).length !== 0)&&cart.items.length>0?<span className="cart-count">{cart.items.length}</span>:""} 
-                        </div>
+                            <ShoppingCartOutlinedIcon/> {
+                            cart && (Object.keys(cart).length !== 0) && cart.items.length > 0 ? <span className="cart-count"> {
+                                cart.items.length
+                            }</span> : ""
+                        } </div>
                     </IconButton>
                     <div>
-                    Cart
+                        Cart
                     </div>
-                    
-                       
-                   
+
 
                 </div>
 
             </div>
         </div>
-
     </div>);
 }

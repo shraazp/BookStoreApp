@@ -1,10 +1,20 @@
-import { getBooks } from "../helper/axios";
+import { getBooks,searchBooks } from "../helper/axios";
+import {getToken} from '../utils/Common';
+const token = getToken();
 const bookRetrieve = () => {
     let url = "http://localhost:5000/books"
-    return getBooks(url).then((response) => {
+    return getBooks(url,`bearer ${token}`).then((response) => {
         return response;
     }).catch((err) => {
         throw err;
     });
 };
-export {bookRetrieve}
+const searchForBook=(data)=>{
+    let url = "http://localhost:5000/books/search"
+    return searchBooks(url,data,`bearer ${token}`).then((response) => {
+        return response;
+    }).catch((err) => {
+        throw err;
+    });
+}
+export {bookRetrieve,searchForBook}

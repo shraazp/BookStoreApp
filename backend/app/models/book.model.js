@@ -86,9 +86,28 @@ const update = (findId, quantity) => {
         throw err;
     });
 };
+/**
+ * @description to search for  a book present in the database
+ * @returns data
+ */
+const searchBook = async (searchText) => {
+    try {
+      let data = await Book.find();
+      let filteredData = data.filter((item) => {
+        return (
+          item.title.toLowerCase().includes(searchText.toLowerCase()) ||
+          item.author.toLowerCase().includes(searchText.toLowerCase())
+        );
+      });
+      return filteredData;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 module.exports = {
     findBook,
     findAllBooks,
-    update
+    update,
+    searchBook
 }

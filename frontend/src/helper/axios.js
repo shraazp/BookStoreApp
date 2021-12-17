@@ -8,8 +8,24 @@ const userConnect = (url, datas) => {
         throw(error);
     });
 }
-const getBooks = (url) => {
-    return(axios({method: "get", url: url}))
+const getBooks = (url, token) => {
+    return(axios({
+        method: "get",
+        url: url,
+        headers: {
+            Authorization: token
+        }
+    }))
+}
+const searchBooks = (url, data, token) => {
+    return(axios({
+        method: "post",
+        url: url,
+        data: data,
+        headers: {
+            Authorization: token
+        }
+    }))
 }
 const getCart = (url, token) => {
     return(axios({
@@ -31,10 +47,10 @@ const addCart = (url, data, token) => {
         }
     }))
 }
-const deleteCart=(url,token)=>{
+const deleteCart = (url, token) => {
     return(axios({
-        method:"delete",
-        url:url,
+        method: "delete",
+        url: url,
         headers: {
             Authorization: token
         }
@@ -43,6 +59,7 @@ const deleteCart=(url,token)=>{
 export {
     userConnect,
     getBooks,
+    searchBooks,
     getCart,
     addCart,
     deleteCart

@@ -10,7 +10,7 @@
  * @param {Object} req 
  * @param {Object} res 
  */
-const {getBooks} = require("../../service/book.service")
+const {getBooks,search} = require("../../service/book.service")
 exports.findAll = (req, res) => {
     getBooks().then(books => {
         res.send(books);
@@ -18,3 +18,16 @@ exports.findAll = (req, res) => {
         return res.send(err)
     });
 }
+ /**
+   * @description Handles the request and response for searching books
+   * @param {Object} req
+   * @param {Object} res
+   */
+  exports.searchBook = async (req, res) => {
+    try {
+      let data = await search(req.body.searchText);
+      return res.status(200).send(data);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  };

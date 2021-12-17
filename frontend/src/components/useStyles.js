@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
     wishlistedButton: {
         width: "170px",
         margin: "5px",
-          border: "1px solid #9D9D9D",
+        border: "1px solid #9D9D9D",
         fontSize: "11px",
-        fontWeight: "bold",
+        fontWeight: "bold"
     },
 
     optionSelect: {

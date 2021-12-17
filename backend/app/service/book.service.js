@@ -5,7 +5,7 @@
  * @version:1.0
  * @since:7/12/2021
  */
-const {findBook, findAllBooks, update} = require('../models/book.model');
+const {findBook, findAllBooks, update,searchBook} = require('../models/book.model');
 /**
  * @description to fetch all books from database
  * @returns promise
@@ -30,8 +30,12 @@ const findABook = (findId) => {
 const updateQuantity = (findId, quantity) => {
     return update(findId, quantity)
 }
+const search=(searchText)=>{
+    return searchBook(searchText)
+}
 module.exports = {
     getBooks,
     findABook,
-    updateQuantity
+    updateQuantity,
+    search
 }
