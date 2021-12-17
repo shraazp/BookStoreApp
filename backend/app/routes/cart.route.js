@@ -1,3 +1,10 @@
+/**
+ * routes for cart operations
+ * @file:cart.route.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const {Router} = require('express');
 const cartController = require('../controllers/cart/cart.controller');
 const routerCart = Router();

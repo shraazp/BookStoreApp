@@ -1,10 +1,28 @@
+/**
+ * schema of book 
+ * @file:book.model.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const mongoose = require('mongoose');
-//to validate url
+// to validate url
 var validate = require('mongoose-validator')
-var urlValidator = [validate( { 
-    validator: value => validator.isURL(value, { protocols: ['http','https','ftp'], require_tld: true, require_protocol: true }),
-    message: 'Must be a Valid URL' 
-  })]
+var urlValidator = [validate(
+        {
+            validator: value => validator.isURL(value, {
+                protocols: [
+                    'http', 'https', 'ftp'
+                ],
+                require_tld: true,
+                require_protocol: true
+            }),
+            message: 'Must be a Valid URL'
+        }
+    )]
+/**
+   * @description Schema for books
+   */
 const BookSchema = mongoose.Schema({
     author: {
         type: String,
@@ -19,13 +37,13 @@ const BookSchema = mongoose.Schema({
         required: true,
         // validate: urlValidator
     },
-    quantity:{
-        type:Number,
-        required:true
+    quantity: {
+        type: Number,
+        required: true
     },
-    price:{
-        type:Number,
-        required:true
+    price: {
+        type: Number,
+        required: true
     },
     description: {
         type: String,
@@ -34,19 +52,30 @@ const BookSchema = mongoose.Schema({
 }, {timestamps: true});
 
 const Book = mongoose.model('Book', BookSchema);
-
- const findAllBooks = () => {
+/**
+ * @description to find all the books present in the database
+ * @returns data
+ */
+const findAllBooks = () => {
     return Book.find()
 }
-const findBook=(findId)=>{
-  return Book.findById(findId)
+/**
+ * @description to find a book present in the database
+ * @returns data
+ */
+const findBook = (findId) => {
+    return Book.findById(findId)
 }
-const update=(findId,quantity)=>{
-    return Book.findOneAndUpdate(findId).then((data) => {
+/**
+ * @description to update a book present in the database
+ * @returns data
+ */
+const update = (findId, quantity) => {
+    return Book.findByIdAndUpdate(findId).then((data) => {
         if (!data) {
             throw "some error";
         } else {
-            (data.quantity = data.quantity-quantity)
+            (data.quantity = data.quantity - quantity)
             return data.save().then((data) => {
                 return data;
             }).catch((err) => {
@@ -58,7 +87,7 @@ const update=(findId,quantity)=>{
     });
 };
 
-module.exports= {
+module.exports = {
     findBook,
     findAllBooks,
     update

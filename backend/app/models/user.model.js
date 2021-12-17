@@ -1,3 +1,10 @@
+/**
+ * model and schema of user 
+ * @file:user.model.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 require("dotenv").config();

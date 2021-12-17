@@ -1,3 +1,10 @@
+/**
+ * user middleware
+ * @file:user.middleware.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const {body, validationResult} = require('express-validator')
 /**
  * validation rules set for user details with express validator  

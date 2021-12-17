@@ -1,3 +1,10 @@
+/**
+ * routes for order operations
+ * @file:order.route.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const {Router} = require('express');
 const orderController = require('../controllers/order/order.controller');
 const routerOrder = Router();

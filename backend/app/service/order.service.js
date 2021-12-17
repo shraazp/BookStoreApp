@@ -1,6 +1,18 @@
+/**
+ * to perform order operations
+ * @file:order.service.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const Order= require('../models/order.model');
 const {getCart} =require('./cart.service');
 const {getcustomer}=require('./customer.service');
+/**
+ * @description to fetch a particular order
+ * @param {Object} userId 
+ * @returns 
+ */
 const getOrder = async (userId) => {
     let order;
     try {
@@ -14,6 +26,11 @@ const getOrder = async (userId) => {
         return null;
     }
 }
+/**
+ * @description to add order in the database
+ * @param {Object} userId 
+ * @returns 
+ */
 const addToOrder = async (userId) => {
     let cart;
     let customerAddress;

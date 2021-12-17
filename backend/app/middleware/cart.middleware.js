@@ -1,5 +1,11 @@
+/**
+ * middleware for cart 
+ * @file:cart.middleware.js
+ * @author:Shravya p
+ * @version:1.0
+ * @since:7/12/2021
+ */
 const jwtHelper = require('../../utils/jwt');
-
 const logger = require('../../utils/logger.js');
 /**
  * to ensure if the token is decoded properly or not
