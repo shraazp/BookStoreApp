@@ -14,4 +14,6 @@ routerBook.get('/',validation.authenticateJWT, books.findAll);
 routerBook.post("/search", validation.authenticateJWT, books.searchBook)
 // finds all book based on search key
 routerBook.post("/sort", validation.authenticateJWT, books.sortBook)
+// finds all book based on page index
+routerBook.get("/:index",validation.authenticateJWT,books.paginationBooks);
 module.exports = routerBook

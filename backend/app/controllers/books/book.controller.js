@@ -10,7 +10,7 @@
  * @param {Object} req 
  * @param {Object} res 
  */
-const {getBooks,search,sort} = require("../../service/book.service")
+const {getBooks,search,sort,pagination} = require("../../service/book.service")
 exports.findAll = (req, res) => {
     getBooks().then(books => {
         res.send(books);
@@ -44,3 +44,17 @@ exports.findAll = (req, res) => {
           return res.status(500).send(error);
         }
       };
+/**
+   * @description Handles the request and response for finding all books
+   * @param {Object} req
+   * @param {Object} res
+   */
+ exports.paginationBooks = async (req, res) => {
+    try {
+      const data = await pagination(req.params.index);
+      return res.send(data);
+    } catch (err) {
+      logger.error("Could not find book", err);
+      return res.send(err);
+    }
+  };

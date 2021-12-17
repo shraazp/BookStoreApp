@@ -30,17 +30,37 @@ const findABook = (findId) => {
 const updateQuantity = (findId, quantity) => {
     return update(findId, quantity)
 }
+/**
+ * @description to search for a book
+ * @param {Object} searchtext
+ * @returns promise
+ */
 const search=(searchText)=>{
     return searchBook(searchText)
 }
+/**
+ * @description to sort the books according to price
+ * @param {Object}order either ascending or descending
+ * @returns promise
+ */
 const sort=(order)=>{
-    console.log(order)
     return  order==="rel"||order==="new"?(findAllBooks()):(sortBooks(order))
 }
+const pagination = async (index) => { 
+    let page = parseInt(index);
+    page = (page - 1) * 12;
+    try {
+      const data = await findAllBooks();
+      return data.slice(page, page + 12);
+    } catch (error) {
+      throw error;
+    }
+  };
 module.exports = {
     getBooks,
     findABook,
     updateQuantity,
     search,
-    sort
+    sort,
+    pagination
 }
